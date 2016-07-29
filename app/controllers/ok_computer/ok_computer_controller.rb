@@ -34,7 +34,7 @@ module OkComputer
 
     def respond(data, status)
       respond_to do |format|
-         format.any(:text, :html) { render text: data, status: status }
+         format.any(:text, :html) { render json: data, status: status }
          format.json { render json: data, status: status }
       end
     end
