@@ -23,6 +23,7 @@ module OkComputer
 
     def render_message
       checks = OkComputer::Registry.all
+      checks.run
       
       render json: { stataus: checks.success? ? 'ok' : 'fail'}
     end
