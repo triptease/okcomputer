@@ -3,6 +3,7 @@ module OkComputer
     layout nil
 
     before_filter :authenticate
+    before_action :render_message, unless: :check_header
 
     if OkComputer.analytics_ignore && defined?(NewRelic::Agent::Instrumentation::ControllerInstrumentation)
       include NewRelic::Agent::Instrumentation::ControllerInstrumentation
@@ -14,6 +15,14 @@ module OkComputer
         f.any(:text, :html) { render text: e.message, status: :not_found }
         f.json { render json: { error: e.message }, status: :not_found }
       end
+    end
+
+    def check_header
+      request.env["Healthcheck-Token"] == ENV['HEALTHCHECK_TOKEN']
+    end
+
+    def render_message
+      render json: { message: "no access" }
     end
 
     def index
