@@ -22,8 +22,15 @@ module OkComputer
     end
 
     def render_message
-      logger.info request
-      render json: { message: "no access" }
+      checks = OkComputer::Registry.all
+      checks.run
+      logger.info checks.all
+
+      render json: { stataus: "no access" }
+    end
+
+    def overall
+
     end
 
     def index
