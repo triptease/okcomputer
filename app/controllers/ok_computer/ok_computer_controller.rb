@@ -23,10 +23,8 @@ module OkComputer
 
     def render_message
       checks = OkComputer::Registry.all
-      checks.run
-      logger.info checks.all
-
-      render json: { stataus: "no access" }
+      
+      render json: { stataus: checks.success? ? 'ok' : 'fail'}
     end
 
     def overall
