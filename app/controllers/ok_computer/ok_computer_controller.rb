@@ -22,7 +22,14 @@ module OkComputer
     end
 
     def render_message
-      render json: { message: "no access" }
+      checks = OkComputer::Registry.all
+      checks.run
+      
+      render json: { stataus: checks.success? ? 'ok' : 'fail'}
+    end
+
+    def overall
+
     end
 
     def index
