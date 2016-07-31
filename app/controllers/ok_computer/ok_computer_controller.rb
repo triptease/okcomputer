@@ -18,7 +18,7 @@ module OkComputer
     end
 
     def check_header
-      request.env["Healthcheck-Token"] == ENV['HEALTHCHECK_TOKEN']
+      request.headers["Healthcheck-Token"] == ENV['HEALTHCHECK_TOKEN']
     end
 
     def render_message
