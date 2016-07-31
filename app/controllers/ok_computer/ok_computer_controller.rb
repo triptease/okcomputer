@@ -2,7 +2,7 @@ module OkComputer
   class OkComputerController < ActionController::Base
     layout nil
 
-    before_filter :authenticate
+    # before_filter :authenticate
     before_action :render_message, unless: :check_header
 
     if OkComputer.analytics_ignore && defined?(NewRelic::Agent::Instrumentation::ControllerInstrumentation)
@@ -52,12 +52,12 @@ module OkComputer
       check.success? ? :ok : :error
     end
 
-    def authenticate
-      if OkComputer.requires_authentication?(params)
-        authenticate_or_request_with_http_basic do |username, password|
-          OkComputer.authenticate(username, password)
-        end
-      end
-    end
+    # def authenticate
+    #   if OkComputer.requires_authentication?(params)
+    #     authenticate_or_request_with_http_basic do |username, password|
+    #       OkComputer.authenticate(username, password)
+    #     end
+    #   end
+    # end
   end
 end
